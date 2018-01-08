@@ -13,7 +13,7 @@ export function createRouter () {
     scrollBehavior: () => ({ y: 0 }),
     routes: [
       { path: '/news/:page(\\d+)?', component: ItemListView },
-      { path: '/', redirect: '/news' }
+      { path: '/', component: ItemListView }
     ]
   })
 }
