@@ -1,10 +1,10 @@
-# *GoCN每日新闻*可视化浏览与检索平台
+# *GoCN每日新闻*  可视化浏览与检索平台
 
 
 ## 介绍
 
-线上Demo：[GoNews](http://gonews.idoubi.cc)
-数据来源：[GoCN每日新闻](https://github.com/gocn/news)
+- 线上Demo：[GoNews](http://gonews.idoubi.cc)
+- 数据来源：[GoCN每日新闻](https://github.com/gocn/news)
   
 ## 部署
 
@@ -13,7 +13,6 @@
 
 ```
 go get -u github.com/mikemintang/gonews
-
 ```
 
 - 获取新闻数据
@@ -51,7 +50,7 @@ server {
     listen       80;
     server_name gonews.idoubi.cc;
     index index.html index.htm index.php;
-    root  /data/project/gonews/web;
+    root  /data/go/src/mikemintang/gonews/web;
 
     location /api {
         proxy_pass http://127.0.0.1:8017;
@@ -109,6 +108,7 @@ crontab -e
 - axios
 - moment
 - mockjs
+
 
 欢迎提交Pull Request
 
