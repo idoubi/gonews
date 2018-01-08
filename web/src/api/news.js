@@ -25,6 +25,6 @@ function getNews() {
 		  ]
 	})
 }
-Mock.mock(/news\?page=\d+/, function(options) {
+Mock.mock(/api\/news\?page=\d+/, function(options) {
 	return getNews()
 })

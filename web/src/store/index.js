@@ -25,7 +25,7 @@ export function createStore() {
 			SET_NEWS(state) {   // 设置新闻数据
 				let page = state.page || 1
 				let keyword = state.keyword
-				var url = '/news?page=' + page + '&keyword=' + keyword
+				var url = '/api/news?page=' + page + '&keyword=' + keyword
 				axios.get(url).then(function(resp) {
 				  	var items = resp.data.items
 				  	var news = []
