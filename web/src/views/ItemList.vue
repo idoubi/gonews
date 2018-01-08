@@ -58,6 +58,7 @@ export default {
   methods: {
     changePage (page) {
       this.$store.commit('SET_PAGE', page)
+      this.$store.commit('SET_NEWS')
     }
   }
 }
