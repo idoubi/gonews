@@ -77,7 +77,7 @@ func getNews(path string) []news {
 		return nil
 	}
 	newsList := []news{}
-	reg := regexp.MustCompile(`(?i)#{1,3}\s+GoCN每日新闻\(([\d-]*)\)\n+((.*\n)+?\n)`)
+	reg := regexp.MustCompile(`(?i)#{0,3}\s*GoCN每日新闻\(([\d-]*)\)\n+\D*((.*\n)+?\n)`)
 	all := reg.FindAllSubmatch(data, -1)
 	for _, item := range all {
 		singleNews := news{}
