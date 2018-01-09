@@ -53,7 +53,7 @@ func getNewsCache(key string) (map[string]string, error) {
 }
 
 // 获取全部新闻
-func getAllNews(page int64, per int64) []map[string]string {
+func getAllNews(page int64, per int64) ([]map[string]string, int64) {
 	key0 := "gonews"
 	keys1, _ := client.SMembers(key0).Result()
 	newsList := map[string]map[string]string{}
@@ -75,11 +75,11 @@ func getAllNews(page int64, per int64) []map[string]string {
 		}
 		i++
 	}
-	return pageNews
+	return pageNews, i
 }
 
 // 条件查询
-func searchNews(keyword string, page int64, per int64) []map[string]string {
+func searchNews(keyword string, page int64, per int64) ([]map[string]string, int64) {
 	keys, _ := client.Keys("*" + keyword + "*").Result()
 	newsList := map[string]map[string]string{}
 	for _, key := range keys {
@@ -97,7 +97,7 @@ func searchNews(keyword string, page int64, per int64) []map[string]string {
 		}
 		i++
 	}
-	return pageNews
+	return pageNews, i
 }
 
 // 对新闻进行排序

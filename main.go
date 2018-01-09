@@ -85,11 +85,17 @@ func getNewsApi(w http.ResponseWriter, req *http.Request) {
 		}
 	}
 	var news []map[string]string
+	var count int64 = 0
 	if keyword != "" {
-		news = searchNews(keyword, page, per)
+		news, count = searchNews(keyword, page, per)
 	} else {
-		news = getAllNews(page, per)
+		news, count = getAllNews(page, per)
 	}
-	jData, _ := json.Marshal(news)
+	data := map[string]interface{}{
+		"total": count,
+		"per":   per,
+		"items": news,
+	}
+	jData, _ := json.Marshal(data)
 	w.Write(jData)
 }
