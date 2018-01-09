@@ -1,7 +1,9 @@
-# *GoCN每日新闻*  可视化浏览与检索平台
+# *GoNews*  -- Golang每日新闻可视化浏览与检索平台
 
 
 ## 介绍
+
+gonews是基于`go+vue`实现的golang每日新闻浏览与检索平台
 
 - 线上Demo：[GoNews](http://gonews.idoubi.cc)
 - 数据来源：[GoCN每日新闻](https://github.com/gocn/news)
@@ -9,36 +11,34 @@
 ## 部署
 
 
-- 获取源码
-
-```
-go get -u github.com/mikemintang/gonews
-```
-
 - 获取新闻数据
 
 ```
 git clone https://github.com/gocn/news /data/news
 ```
 
+- 获取源码
+
+```
+go get -u github.com/mikemintang/gonews
+```
+
 - 解析数据
 
 ```
-cd /data/go/src/github.com/mikemintang/gonews
-go install
-nohup gonews -d /data/news > ./gonews.log 2>&1 
+nohup gonews -d /data/news > /data/log/gonews.log 2>&1 
 ```
 
 - 启动Api
 
 ```
-nohup gonews -a api -p 8017 > ./gonews.log 2>&1 &
+nohup gonews -a api -p 8017 > /data/log/gonews.log 2>&1 &
 ```
 
 - 前端部署
 
 ```
-cd /data/go/src/github.com/mikemintang/gonews/web
+cd $GOPATH/src/github.com/mikemintang/gonews/web
 npm install
 npm run build
 ```
@@ -53,7 +53,8 @@ server {
     root  /data/go/src/mikemintang/gonews/web;
 
     location /api {
-        proxy_pass http://127.0.0.1:8017;
+        rewrite         ^.+api/?(.*)$ /$1 break;
+        proxy_pass      http://127.0.0.1:8017;
     }
 }
 ```
@@ -65,8 +66,7 @@ server {
 
 cd /data/news
 git pull origin master
-cd /data/go/src/gitbub.com/mikemintang/gonews
-./gonews -d /data/news
+nohup gonews -d /data/news/ > /data/log/gonews.log 2>&1
 ```
 
 - 定时任务

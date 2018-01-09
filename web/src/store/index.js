@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import moment from 'moment'
-import '../api/news'
+// import '../api/news'  
 
 Vue.use(Vuex)
 
