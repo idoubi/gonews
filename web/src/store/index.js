@@ -33,7 +33,7 @@ export function createStore() {
 				    	var sNews = {
 					      	id: items[i].id,
 					      	title: items[i].title,
-					      	url: items[i].url,
+					      	url: items[i].link,
 					      	ctime: moment(items[i].ctime, 'YYYYMMDD').fromNow(),
 					      	weekday: moment(items[i].ctime).format('dddd').substr(0, 3)
 					    }
