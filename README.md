@@ -10,7 +10,7 @@ gonews是基于`go+vue`实现的golang每日新闻浏览与检索平台
 
 ## 项目截图
 
-![gonews](http://qiniu.idoubi.cc/gonews.jpg)
+![gonews](gonews.jpg)
   
 ## 部署
 
