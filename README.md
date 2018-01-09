@@ -26,13 +26,13 @@ git clone https://github.com/gocn/news /data/news
 ```
 cd /data/go/src/github.com/mikemintang/gonews
 go install
-./gonews -d /data/news
+nohup gonews -d /data/news > ./gonews.log 2>&1 
 ```
 
 - 启动Api
 
 ```
-./gonews -a api &
+nohup gonews -a api -p 8017 > ./gonews.log 2>&1 &
 ```
 
 - 前端部署

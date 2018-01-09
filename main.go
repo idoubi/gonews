@@ -3,27 +3,37 @@ package main
 import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 	"strconv"
 	"sync"
 )
 
 var dir string
 var act string
+var port int
 
 var wg sync.WaitGroup
 
 func init() {
 	flag.StringVar(&dir, "d", "", "the path of news to parse")
-	flag.StringVar(&act, "a", "cache", "cache news or show news in the web")
+	flag.StringVar(&act, "a", "cache", "the action to run service, values 'api' or 'cache'")
+	flag.IntVar(&port, "p", 8017, "the port to listen for api service")
 }
 
 func main() {
 	flag.Parse()
 	if act == "api" { // web服务
+		http.HandleFunc("/", showApis)
 		http.HandleFunc("/news", getNewsApi) // 获取新闻数据api
-		http.ListenAndServe(":8017", nil)
+		err := http.ListenAndServe(":"+strconv.Itoa(port), nil)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "ListenAndServe error：%s", err)
+			os.Exit(1)
+		}
+		fmt.Fprintf(os.Stdout, "%s", "Success to run api service")
 	} else { // 缓存数据操作
 		files := getFileList(dir)
 		for _, file := range files {
@@ -31,6 +41,7 @@ func main() {
 			go cacheNews(file)
 		}
 		wg.Wait()
+		fmt.Fprintf(os.Stdout, "%s", "Success to cache news")
 	}
 }
 
@@ -47,6 +58,11 @@ func cacheNews(path string) {
 		}
 		setNewsCache(cache) // 缓存数据
 	}
+}
+
+// 首页展示api列表
+func showApis(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte(`{"apis":["/news"]}`))
 }
 
 // 获取新闻的api
