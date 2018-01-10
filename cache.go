@@ -19,14 +19,14 @@ func newClient() *redis.Client {
 	client = redis.NewClient(&redis.Options{
 		Addr:     "127.0.0.1:6379",
 		Password: "",
-		DB:       0,
+		DB:       cacheDB,
 	})
 	return client
 }
 
 // 设置新闻缓存
 func setNewsCache(cache map[string]interface{}) error {
-	key0 := "gonews"
+	key0 := cachePrefix
 	key1 := ""
 	key2 := ""
 	if value, ok := cache["ctime"].(string); ok {
@@ -54,7 +54,7 @@ func getNewsCache(key string) (map[string]string, error) {
 
 // 获取全部新闻
 func getAllNews(page int64, per int64) ([]map[string]string, int64) {
-	key0 := "gonews"
+	key0 := cachePrefix
 	keys1, _ := client.SMembers(key0).Result()
 	newsList := map[string]map[string]string{}
 	for _, key1 := range keys1 {
@@ -80,7 +80,7 @@ func getAllNews(page int64, per int64) ([]map[string]string, int64) {
 
 // 条件查询
 func searchNews(keyword string, page int64, per int64) ([]map[string]string, int64) {
-	keys, _ := client.Keys("*" + keyword + "*").Result()
+	keys, _ := client.Keys(cachePrefix + "*" + keyword + "*").Result()
 	newsList := map[string]map[string]string{}
 	for _, key := range keys {
 		news, err := getNewsCache(key)

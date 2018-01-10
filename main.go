@@ -11,6 +11,11 @@ import (
 	"sync"
 )
 
+const (
+	cacheDB     = 2        // 存储数据的redis db
+	cachePrefix = "gonews" // 缓存前缀
+)
+
 var dir string
 var act string
 var port int
