@@ -53,13 +53,18 @@ npm run build
 ```
 server {
     listen       80;
-    server_name gonews.idoubi.cc;
+    server_name gonews.cc;
     index index.html index.htm index.php;
     root  /data/go/src/mikemintang/gonews/web;
 
     location /api {
         rewrite         ^.+api/?(.*)$ /$1 break;
         proxy_pass      http://127.0.0.1:8017;
+    }
+
+    location /news {
+        rewrite         ^.+news/?(.*)$ /$1 break;
+        proxy_pass      http://gonews.cc;
     }
 }
 ```
@@ -71,14 +76,14 @@ server {
 
 cd /data/news
 git pull origin master
-nohup gonews -d /data/news/ > /data/log/gonews.log 2>&1
 ```
 
 - 定时任务
 
 ```
 crontab -e
-*/10 * * * * /bin/sh /data/shell/cache_news.sh
+*/1 * * * * /bin/sh /data/shell/cache_news.sh
+*/2 * * * * nohup gonews -d /data/news/ > /data/log/gonews.log 2>&1
 ```
 
 
