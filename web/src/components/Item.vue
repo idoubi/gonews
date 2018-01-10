@@ -1,6 +1,6 @@
 <template>
   <li class="news-item">
-    <span class="score">{{ item.weekday }}</span>
+    <span class="score" v-if="item.newDay">{{ item.weekday }}</span>
     <span class="title">
       <template v-if="item.url">
         <a :href="item.url" target="_blank" rel="noopener">{{ item.title ? item.title : item.url }}</a>

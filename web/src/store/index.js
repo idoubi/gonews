@@ -35,7 +35,11 @@ export function createStore() {
 					      	title: items[i].title,
 					      	url: items[i].link,
 					      	ctime: moment(items[i].ctime, 'YYYYMMDD').endOf('day').fromNow(),
-					      	weekday: moment(items[i].ctime).format('dddd').substr(0, 3)
+					      	weekday: moment(items[i].ctime).format('dddd').substr(0, 3),
+					      	newDay: 1
+					    }
+					    if (i > 0 && items[i].ctime == items[i-1].ctime) {  // 合并同一天的新闻
+					    	sNews.newDay = 0
 					    }
 				    	news.push(sNews)
 				  	}
