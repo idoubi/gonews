@@ -75,4 +75,16 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     })
   ])
+} else if(process.env.NODE_ENV === 'origin') {
+  module.exports.devServer = {
+    historyApiFallback: true,
+    noInfo: true,
+    proxy: {  
+      '/api': {
+        target: 'http://gonews.cc/',
+        changeOrigin: true,
+        secure: false
+      }  
+    }  
+  }
 }

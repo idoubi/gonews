@@ -13,7 +13,10 @@
           <Item v-for="item in newsItems" :key="item.title+item.id" :item="item">
           </Item>
         </transition-group>
-        <div id="copyright">Copyright © 2018 <a href="http://idoubi.cc" target="_blank">idoubi.cc</a></div>
+        <div class="copyright">
+          Copyright © 2018 <a href="http://idoubi.cc" target="_blank">idoubi.cc</a>
+          | Theme By <a href="https://github.com/vuejs/vue-hackernews-2.0" target="_blank">Vue Hackernews</a>
+          </div>
       </div>
     </transition>
   </div>
@@ -65,7 +68,7 @@ export default {
 </script>
 
 <style lang="stylus">
-#copyright
+.copyright
   position: absolute
   width: 100%
   text-align: center

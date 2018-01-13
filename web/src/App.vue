@@ -2,16 +2,14 @@
   <div id="app">
     <header class="header">
       <nav class="inner">
-        <router-link to="/" exact id="logo">
-          <img class="logo" src="./assets/logo.png" alt="logo">
-        </router-link>
+        <a href="#" style="width: 40px;"><img class="logo" src="./assets/logo.png" alt="logo"></a>
         <router-link to="/news">News</router-link>
         <a href="https://gocn.io/" target="_blank" class="">Forum</a>
         <a href="http://idoubi.cc" target="_blank" class="">Author</a>
         <a href="https://github.com/mikemintang/gonews" target="_blank" class="">Github</a>
        
-       <div class="github">
-         <input type="text" v-model="keyword" id="search" placeholder="keyword...">
+       <div class="search">
+         <input type="text" v-model="keyword" placeholder="keyword...">
        </div>
         
       </nav>
@@ -90,26 +88,26 @@ a
       font-weight 400
     &:nth-child(6)
       margin-right 0
-  .github
+  .search
     color #fff
     font-size .9em
     margin 0
     float right
-  #search
-    border: 1px solid #ccc
-    padding: 8px 10px
-    color: #333
-    margin-top: -5px
+    input
+      background #fff
+      color #333
+      padding 8px 10px
+      margin-top -3px
+      border none
+      outline none
+      border-radius 2px
 .logo
   position: absolute
   top: 5px
   width: 44px
   height: 44px
-  margin-right 10px
   display inline-block
   vertical-align middle
-#logo
-  margin-right: 4em;
 .view
   max-width 800px
   margin 0 auto
