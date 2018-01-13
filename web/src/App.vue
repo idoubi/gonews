@@ -125,6 +125,7 @@ a
       padding 15px
     a
       margin-right 1em
-    .github
-      display none
+@media (max-width 650px)
+  .search
+    display none
 </style>
