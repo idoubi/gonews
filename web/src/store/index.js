@@ -26,6 +26,9 @@ export function createStore() {
 				let page = state.page || 1
 				let keyword = state.keyword
 				var url = '/api/news?page=' + page + '&keyword=' + keyword
+
+				Vue.prototype.$bar.start()
+
 				axios.get(url).then(function(resp) {
 				  	var items = resp.data.items
 				  	var news = []
@@ -45,9 +48,13 @@ export function createStore() {
 				  	}
 				  	state.newsTotal = resp.data.total
 				  	state.newsPer = resp.data.per
-				  	state.newsItems = news
+					state.newsItems = news
+					  
+					Vue.prototype.$bar.finish()
+					
 				}).catch(function() {
-				  	console.log('error')
+					console.log('error')
+					Vue.prototype.$bar.fail()
 				})
 			}
 		}

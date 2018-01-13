@@ -30,7 +30,7 @@ export default {
   position relative
   line-height 20px
   .score
-    color #ff6600
+    color #499ef3
     font-size 1.1em
     font-weight 700
     position absolute
