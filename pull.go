@@ -22,19 +22,18 @@ func initDataPuller(dir string, interval int64) {
 				fmt.Fprintf(os.Stderr, "%s\n", err)
 				fmt.Fprintf(os.Stderr, "%s\n", out)
 			} else {
-				if strings.Contains(string(out), "Already up to date") {
-					continue
-				}
-				fmt.Fprintf(os.Stdout, "%s\n", "Pull success")
+				if !strings.Contains(string(out), "Already up to date") {
+					fmt.Fprintf(os.Stdout, "%s\n", "Pull success")
 
-				// 缓存数据操作
-				files := getFileList(dir)
-				for _, file := range files {
-					wg.Add(1)
-					go cacheNews(file)
+					// 缓存数据操作
+					files := getFileList(dir)
+					for _, file := range files {
+						wg.Add(1)
+						go cacheNews(file)
+					}
+					wg.Wait()
+					fmt.Fprintf(os.Stdout, "%s\n", "Success to cache news")
 				}
-				wg.Wait()
-				fmt.Fprintf(os.Stdout, "%s\n", "Success to cache news")
 			}
 			// 定时器
 			<-ticker.C
