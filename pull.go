@@ -1,11 +1,11 @@
 package main
 
 import (
-	"time"
-	"os/exec"
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
+	"time"
 )
 
 // 自动获取数据, interval单位为分钟
@@ -22,7 +22,7 @@ func initDataPuller(dir string, interval int64) {
 				fmt.Fprintf(os.Stderr, "%s\n", err)
 				fmt.Fprintf(os.Stderr, "%s\n", out)
 			} else {
-				if strings.Contains(string(out),"Already up to date") {
+				if strings.Contains(string(out), "Already up to date") {
 					continue
 				}
 				fmt.Fprintf(os.Stdout, "%s\n", "Pull success")
