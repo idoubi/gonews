@@ -19,6 +19,7 @@ const (
 var dir string
 var act string
 var port int
+var pullInterval int64 // 自动拉取间隔
 
 var wg sync.WaitGroup
 
@@ -26,6 +27,7 @@ func init() {
 	flag.StringVar(&dir, "d", "", "the path of news to parse")
 	flag.StringVar(&act, "a", "cache", "the action to run service, values 'api' or 'cache'")
 	flag.IntVar(&port, "p", 8017, "the port to listen for api service")
+	flag.Int64Var(&pullInterval, "pull", 60, "the time interval (minutes) to pull data source, ")
 }
 
 func main() {
@@ -40,13 +42,8 @@ func main() {
 		}
 		fmt.Fprintf(os.Stdout, "%s", "Success to run api service")
 	} else { // 缓存数据操作
-		files := getFileList(dir)
-		for _, file := range files {
-			wg.Add(1)
-			go cacheNews(file)
-		}
-		wg.Wait()
-		fmt.Fprintf(os.Stdout, "%s", "Success to cache news")
+		initDataPuller(dir, pullInterval)
+		select {}
 	}
 }
 

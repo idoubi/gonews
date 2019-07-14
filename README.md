@@ -12,7 +12,7 @@ gonews是基于`go+vue`实现的golang每日新闻浏览与检索平台
 ## 项目截图
 
 ![gonews](gonews.jpg)
-  
+
 ## 部署
 
 
@@ -28,11 +28,13 @@ git clone https://github.com/gocn/news /data/news
 go get -u github.com/mikemintang/gonews
 ```
 
-- 解析数据
+- 启动后台服务，拉取、解析数据
 
 ```
 nohup gonews -d /data/news > /data/log/gonews.log 2>&1 
 ```
+
+可选参数：-pull <minutes> ，拉取数据源的时间间隔，单位分钟，默认值60
 
 - 启动Api
 
@@ -67,23 +69,6 @@ server {
         proxy_pass      http://gonews.cc;
     }
 }
-```
-
-- Shell脚本
-
-```
-#!/bin/sh
-
-cd /data/news
-git pull origin master
-```
-
-- 定时任务
-
-```
-crontab -e
-*/1 * * * * /bin/sh /data/shell/cache_news.sh
-*/2 * * * * nohup gonews -d /data/news/ > /data/log/gonews.log 2>&1
 ```
 
 
