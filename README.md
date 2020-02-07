@@ -5,8 +5,8 @@
 
 gonews是基于`go+vue`实现的golang每日新闻浏览与检索平台
 
-- 项目地址：[Github](https://github.com/mikemintang/gonews)
-- 线上Demo：[GoNews](http://gonews.cc)
+- 项目地址：[Github](https://github.com/idoubi/gonews)
+- 线上Demo：[GoNews](http://gonews.idoubi.cc)
 - 数据来源：[GoCN每日新闻](https://github.com/gocn/news)
 
 ## 项目截图
@@ -25,7 +25,7 @@ git clone https://github.com/gocn/news /data/news
 - 获取源码
 
 ```
-go get -u github.com/mikemintang/gonews
+go get -u github.com/idoubi/gonews
 ```
 
 - 启动后台服务，拉取、解析数据
@@ -45,7 +45,7 @@ nohup gonews -a api -p 8017 > /data/log/gonews.log 2>&1 &
 - 前端部署
 
 ```
-cd $GOPATH/src/github.com/mikemintang/gonews/web
+cd $GOPATH/src/github.com/idoubi/gonews/web
 npm install
 npm run build
 ```
@@ -57,7 +57,7 @@ server {
     listen       80;
     server_name gonews.cc;
     index index.html index.htm index.php;
-    root  /data/go/src/mikemintang/gonews/web;
+    root  /data/go/src/idoubi/gonews/web;
 
     location /api {
         rewrite         ^.+api/?(.*)$ /$1 break;
